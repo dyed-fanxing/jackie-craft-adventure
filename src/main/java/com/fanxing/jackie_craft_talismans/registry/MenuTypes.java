@@ -1,7 +1,6 @@
 package com.fanxing.jackie_craft_talismans.registry;
 
 import com.fanxing.jackie_craft_talismans.JackieCraftTalismans;
-import com.fanxing.jackie_craft_talismans.menu.GravitySelectionMenu;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
@@ -12,11 +11,6 @@ import java.util.function.Supplier;
 
 public class MenuTypes {
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(BuiltInRegistries.MENU, JackieCraftTalismans.MOD_ID);
-
-
-    public static final Supplier<MenuType<GravitySelectionMenu>> GRAVITY_SELECTION_MENU = MENUS.register("gravity_selection",
-                    () -> new MenuType<>(GravitySelectionMenu::new, FeatureFlags.DEFAULT_FLAGS));
-
 
     public static void register(IEventBus eventBus) {
         MENUS.register(eventBus);

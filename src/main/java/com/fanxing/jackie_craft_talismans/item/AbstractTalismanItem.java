@@ -1,6 +1,6 @@
 package com.fanxing.jackie_craft_talismans.item;
 
-import com.fanxing.jackie_craft_talismans.common.registry.DataComponents;
+import com.fanxing.lib.registry.DataComponents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;

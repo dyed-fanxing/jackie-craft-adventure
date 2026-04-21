@@ -2,9 +2,9 @@ package com.fanxing.jackie_craft_talismans.item;
 
 import com.fanxing.jackie_craft_talismans.JackieCraftTalismans;
 import com.fanxing.jackie_craft_talismans.client.render.item.PigTalismanItemRender;
-import com.fanxing.jackie_craft_talismans.common.registry.Attributes;
-import com.fanxing.jackie_craft_talismans.common.registry.DataComponents;
-import com.fanxing.jackie_craft_talismans.utils.collsion.CapsuleCCDUtils;
+import com.fanxing.lib.registry.Attributes;
+import com.fanxing.lib.registry.DataComponents;
+import com.fanxing.lib.utils.collsion.CapsuleCCDUtils;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;

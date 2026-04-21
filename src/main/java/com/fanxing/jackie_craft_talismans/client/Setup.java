@@ -1,15 +1,6 @@
 package com.fanxing.jackie_craft_talismans.client;
 
 import com.fanxing.jackie_craft_talismans.JackieCraftTalismans;
-import com.fanxing.jackie_craft_talismans.net.packet.*;
-import com.fanxing.jackie_craft_talismans.client.particle.BallGrowParticle;
-import com.fanxing.jackie_craft_talismans.client.particle.CustomWhiteAshNoGravityParticle;
-import com.fanxing.jackie_craft_talismans.client.particle.CustomWhiteAshParticle;
-import com.fanxing.jackie_craft_talismans.client.particle.LightStreakParticle;
-import com.fanxing.jackie_craft_talismans.client.screen.GravitySelectionScreen;
-import com.fanxing.jackie_craft_talismans.registry.EntityTypes;
-import com.fanxing.jackie_craft_talismans.registry.MenuTypes;
-import com.fanxing.jackie_craft_talismans.registry.ParticleTypes;
 import com.zigythebird.playeranim.animation.PlayerAnimationController;
 import com.zigythebird.playeranim.api.PlayerAnimationFactory;
 import com.zigythebird.playeranimcore.enums.PlayState;
@@ -51,10 +42,6 @@ public class Setup {
      */
     @SubscribeEvent
     public static void registerParticleProviderHandler(final RegisterParticleProvidersEvent event) {
-        event.registerSpriteSet(ParticleTypes.BALL_GROW.get(), BallGrowParticle.Provider::new);
-        event.registerSpriteSet(ParticleTypes.LIGHT_STREAK.get(), LightStreakParticle.Provider::new);
-        event.registerSpriteSet(ParticleTypes.CUSTOM_WHITE_ASH.get(), CustomWhiteAshParticle.Provider::new);
-        event.registerSpriteSet(ParticleTypes.CUSTOM_NO_GRAVITY_WHITE_ASH.get(), CustomWhiteAshNoGravityParticle.Provider::new);
     }
 
     /**
@@ -65,25 +52,6 @@ public class Setup {
     public static void registerPayloadHandler(final RegisterPayloadHandlersEvent event) {
         // 初始化注册器，设置网络版本为"1"
         final PayloadRegistrar registrar = event.registrar("1");
-        // 仅客户端接收的Payload
-
-        registrar.playToClient(AnimPacket.TYPE, AnimPacket.STREAM_CODEC, AnimPacket::handle);
-
-
-        registrar.playToClient(WarningTipPacket.Cylinder.TYPE, WarningTipPacket.Cylinder.STREAM_CODEC, WarningTipPacket.Cylinder::handle);
-        registrar.playToClient(WarningTipPacket.Cube.TYPE, WarningTipPacket.Cube.STREAM_CODEC, WarningTipPacket.Cube::handle);
-        registrar.playToClient(WarningTipPacket.Quad.TYPE, WarningTipPacket.Quad.STREAM_CODEC, WarningTipPacket.Quad::handle);
-        registrar.playToClient(WarningTipPacket.QuadPrecession.TYPE, WarningTipPacket.QuadPrecession.STREAM_CODEC, WarningTipPacket.QuadPrecession::handle);
-        registrar.playToClient(WarningTipPacket.QuadCirclePrecession.TYPE, WarningTipPacket.QuadCirclePrecession.STREAM_CODEC, WarningTipPacket.QuadCirclePrecession::handle);
-        registrar.playToClient(WarningTipPacket.Circle.TYPE, WarningTipPacket.Circle.STREAM_CODEC, WarningTipPacket.Circle::handle);
-        registrar.playToClient(WarningTipPacket.CurveStrip.TYPE, WarningTipPacket.CurveStrip.STREAM_CODEC, WarningTipPacket.CurveStrip::handle);
-        registrar.playToClient(WarningTipPacket.RadialPrecessionCurveStripsPacket.TYPE, WarningTipPacket.RadialPrecessionCurveStripsPacket.STREAM_CODEC, WarningTipPacket.RadialPrecessionCurveStripsPacket::handle);
-        registrar.playToClient(WarningTipPacket.RadialPrecessionCurveStripsGravityPacket.TYPE, WarningTipPacket.RadialPrecessionCurveStripsGravityPacket.STREAM_CODEC, WarningTipPacket.RadialPrecessionCurveStripsGravityPacket::handle);
-
-
-        registrar.playToClient(SyncMotionPayload.TYPE,SyncMotionPayload.STREAM_CODEC, SyncMotionPayload::handle);
-
-        registrar.playToServer(GravitySelectionPacket.TYPE,GravitySelectionPacket.STREAM_CODEC, GravitySelectionPacket::handle);
     }
 
     /**
@@ -91,7 +59,6 @@ public class Setup {
      */
     @SubscribeEvent
     public static void onRegisterMenuScreens(final RegisterMenuScreensEvent event) {
-        event.register(MenuTypes.GRAVITY_SELECTION_MENU.get(), GravitySelectionScreen::new);
     }
 
 

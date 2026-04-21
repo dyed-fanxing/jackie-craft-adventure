@@ -2,7 +2,7 @@ package com.fanxing.jackie_craft_talismans.client.render.layer;
 
 import com.fanxing.jackie_craft_talismans.JackieCraftTalismans;
 import com.fanxing.jackie_craft_talismans.item.AbstractTalismanItem;
-import com.fanxing.jackie_craft_talismans.common.registry.DataComponents;
+import com.fanxing.lib.registry.DataComponents;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;

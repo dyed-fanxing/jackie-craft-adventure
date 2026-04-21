@@ -1,6 +1,0 @@
-{
-  "exhaustion": 0.0,
-  "message_id": "jackie_craft_talismans.frame_blockable",
-  "scaling": "when_caused_by_living_non_player",
-  "death_message_type": "jackie_craft_talismans:custom_noun_verb_death"
-}

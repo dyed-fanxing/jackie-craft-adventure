@@ -1,13 +1,13 @@
 package com.fanxing.jackie_craft_talismans.client.render.layer;
 
-import com.fanxing.jackie_craft_talismans.common.render.CapsuleRenderer;
-import com.fanxing.jackie_craft_talismans.common.render.SphereRenderer;
-import com.fanxing.jackie_craft_talismans.common.render.component.Beam;
-import com.fanxing.jackie_craft_talismans.common.render.component.Lightning;
-import com.fanxing.jackie_craft_talismans.common.render.types.BeamRenderType;
 import com.fanxing.jackie_craft_talismans.item.AbstractTalismanItem;
 import com.fanxing.jackie_craft_talismans.item.PigTalismanItem;
 import com.fanxing.jackie_craft_talismans.mixin.ModelPartAccessor;
+import com.fanxing.lib.client.render.component.Beam;
+import com.fanxing.lib.client.render.component.Lightning;
+import com.fanxing.lib.client.render.shape.CapsuleRenderer;
+import com.fanxing.lib.client.render.shape.SphereRenderer;
+import com.fanxing.lib.client.render.type.BeamRenderType;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;

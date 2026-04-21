@@ -1,6 +1,6 @@
 package com.fanxing.jackie_craft_talismans.data;
 
-import com.fanxing.jackie_craft_talismans.common.damagesource.DamageTypes;
+import com.fanxing.lib.data.damagesource.DamageTypes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.DamageTypeTags;

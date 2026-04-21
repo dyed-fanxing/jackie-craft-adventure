@@ -1,8 +1,6 @@
 package com.fanxing.jackie_craft_talismans.registry;
 
 import com.fanxing.jackie_craft_talismans.JackieCraftTalismans;
-import com.fanxing.jackie_craft_talismans.entity.persistentData.SoulMode;
-import net.minecraft.core.Direction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -12,8 +10,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.function.Supplier;
 
 /**
  * @author FanXing
