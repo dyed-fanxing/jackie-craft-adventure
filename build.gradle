@@ -1,0 +1,209 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'idea'
+    id 'net.neoforged.moddev' version '2.0.95'
+    id 'com.github.johnrengelman.shadow' version '8.1.1' apply false
+}
+
+version = mod_version
+group = mod_group_id
+
+base {
+    archivesName = archives_name
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { name = 'NeoForged'; url = 'https://maven.neoforged.net/releases' }
+    maven { name = 'GeckoLib'; url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+    maven { name = "KosmX's maven"; url = 'https://maven.kosmx.dev/' }
+    maven { name = "RedlanceMinecraft"; url = "https://repo.redlance.org/public" }
+    maven { url "https://cursemaven.com" }
+    maven { name = "ModMaven"; url = "https://modmaven.dev" }
+    maven { name = "Jared's maven"; url = "https://maven.blamejared.com/" }
+}
+
+dependencies {
+    // 核心库（版本号会在复合构建中被替换）
+    implementation "com.fanxing.fx_lib:fx-lib-${minecraft_version}-neoforge-${fx_lib_version}"
+
+
+    // 由于核心库对以下 API 使用 compileOnly，主项目必须显式添加才能编译和运行
+    implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
+    implementation("com.zigythebird.playeranim:PlayerAnimationLibNeo:$pal_version") {
+        exclude group: 'com.google.code.gson'
+        exclude group: 'org.slf4j'
+        exclude group: 'it.unimi.dsi', module: 'fastutil'
+        exclude group: 'io.netty', module: 'netty-buffer'
+    }
+    implementation "top.theillusivec4.curios:curios-neoforge:${curios_version}+${minecraft_version}"
+
+    // JEI 可选（仅编译时）
+    compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
+}
+
+neoForge {
+    version = project.neo_version
+
+    runs {
+        client {
+            client()
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+        server {
+            server()
+            programArgument '--nogui'
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+        gameTestServer {
+            type = "gameTestServer"
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+        data {
+            data()
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+        configureEach {
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            logLevel = org.slf4j.event.Level.DEBUG
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+// ========== 动态处理 mods.toml 中的依赖声明 ==========
+def packagingMode = project.findProperty('packaging') ?: 'dependency'
+
+processResources {
+    if (packagingMode == 'dependency') {
+        filesMatching('META-INF/neoforge.mods.toml') {
+            expand(
+                    core_dependency: '''
+[[dependencies.${mod_id}]]
+    modId = "fx_corelib"
+    mandatory = true
+    versionRange = "[1.0,2.0)"
+    ordering = "NONE"
+    side = "BOTH"
+'''
+            )
+        }
+    } else {
+        filesMatching('META-INF/neoforge.mods.toml') {
+            expand(core_dependency: '')
+        }
+    }
+}
+
+// 生成 mod metadata 的简化版本（如果需要）
+var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
+    var replaceProperties = [
+            minecraft_version      : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
+            neo_version_range      : neo_version_range,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+            mod_authors            : mod_authors,
+            mod_description        : mod_description,
+            geckolib_version_range : geckolib_version_range,
+            pal_version_range      : pal_version_range
+    ]
+    inputs.properties replaceProperties
+    expand replaceProperties
+    from "src/main/templates"
+    into "build/generated/sources/modMetadata"
+}
+sourceSets.main.resources.srcDir generateModMetadata
+neoForge.ideSyncTask generateModMetadata
+
+// ========== 根据打包模式配置构建 ==========
+if (packagingMode == 'embed') {
+    apply plugin: 'com.github.johnrengelman.shadow'
+
+    tasks.named('jar').configure {
+        enabled = false
+    }
+
+    shadowJar {
+        archiveClassifier.set('')
+        configurations = [project.configurations.runtimeClasspath]
+
+        // 内嵌核心库（不重定位，直接合并）
+        // 如果想避免与独立核心库冲突，可取消下面注释：
+        // relocate 'com.fanxing.corelib', 'com.fanxing.mymod.shaded.corelib'
+        // exclude 'META-INF/neoforge.mods.toml'
+        // exclude 'com/fanxing/corelib/FanxingCoreLibMod.class'
+    }
+
+    tasks.named('build').configure {
+        dependsOn shadowJar
+    }
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                artifact shadowJar
+            }
+        }
+        repositories {
+            mavenLocal()
+        }
+    }
+} else {
+    // dependency 模式
+    tasks.named('jar') {
+        archiveClassifier.set('')
+    }
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+            }
+        }
+        repositories {
+            mavenLocal()
+        }
+    }
+}
+
+java {
+    withSourcesJar()
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}
+
+
+
+
+def embed = project.hasProperty('embed')
+if (embed) {
+    apply plugin: 'com.github.johnrengelman.shadow'
+    jar.enabled = false
+    shadowJar {
+        archiveClassifier.set('')
+        configurations = [project.configurations.runtimeClasspath]
+    }
+    build.dependsOn shadowJar
+}

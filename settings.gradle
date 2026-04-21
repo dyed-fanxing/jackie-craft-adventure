@@ -1,0 +1,18 @@
+pluginManagement {
+    repositories {
+        mavenLocal()
+        gradlePluginPortal()
+        maven { url = 'https://maven.neoforged.net/releases' }
+    }
+}
+
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
+}
+
+rootProject.name = "jackie_craft_talismans"
+
+// 如果 core-lib 子模块存在，则包含为复合构建
+if (file('lib').exists()) {
+    includeBuild('lib')
+}
