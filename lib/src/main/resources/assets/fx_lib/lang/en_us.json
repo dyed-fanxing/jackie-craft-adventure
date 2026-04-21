@@ -1,8 +1,0 @@
-{
-  "itemGroup.fx_lib": "fx_lib",
-  "mount.onboard.double.key.dismount": "Double Press %1$s to Dismount",
-  "fx_lib.debug.ccd.on": "CCD Debug: ON",
-  "fx_lib.debug.ccd.off": "CCD Debug: OFF",
-  "config.fx_lib.general.segments": "circle segments",
-  "gui.fx_lib.close": "关闭"
-}
