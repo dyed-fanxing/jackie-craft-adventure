@@ -18,8 +18,8 @@
   "gui.jackie_craft_talismans.color_preset.tooltip": "请输入预设名称",
   "key.category.jackie_craft_talismans": "成龙历险记-符咒",
   "key.jackie_craft_talismans.talisman_config": "符咒配置界面",
-
   "jackie_craft_talismans.config.entities_eye_offset": "实体眼睛位置偏移列表",
   "curios.identifier.talisman": "符咒",
-  "curios.modifiers.talisman": "佩戴符咒时："
+  "curios.modifiers.talisman": "佩戴符咒时：",
+  "key.jackie_craft_talismans.curio.use.talisman": "佩戴符咒时使用"
 }
