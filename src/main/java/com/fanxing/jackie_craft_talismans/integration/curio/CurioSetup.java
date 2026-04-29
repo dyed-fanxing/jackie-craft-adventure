@@ -7,6 +7,7 @@ import com.fanxing.jackie_craft_talismans.integration.curio.register.KeyBindings
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.neoforge.common.NeoForge;
 
 /**
  * @author dyed_fanxing
@@ -14,12 +15,11 @@ import net.neoforged.fml.loading.FMLEnvironment;
  */
 public class CurioSetup {
     public static void register(IEventBus bus) {
-        bus.addListener(TalismanCurioForceRefreshHandler::onMainhandChange);
         bus.addListener(ItemCapabilities::registerCapabilities);
-        // 仅客户端的事件
         if (FMLEnvironment.dist == Dist.CLIENT) {
             bus.addListener(KeyBindings::registerKeys);
-            bus.addListener(TalismanActivationHandler::onClientTick);
+            NeoForge.EVENT_BUS.addListener(TalismanActivationHandler::onClientTick);
         }
+        NeoForge.EVENT_BUS.addListener(TalismanCurioForceRefreshHandler::onMainhandChange);
     }
 }

@@ -89,6 +89,12 @@ type = "optional" #（必填）
 versionRange = "${pal_version_range}"
 ordering = "NONE"
 side = "BOTH"
+[[dependencies."${mod_id}"]] #（可选）
+modId = "curios"   # 注意实际 modId
+type = "optional" #（必填）
+versionRange = "${curios_version_range}"
+ordering = "NONE"
+side = "BOTH"
 
 
 # Features 是游戏环境的特定属性，您可能需要声明您的要求。此示例声明

@@ -1,7 +1,7 @@
 package com.fanxing.jackie_craft_talismans.integration;
 
+import com.fanxing.jackie_craft_talismans.integration.curio.CurioSetup;
 import com.fanxing.lib.integration.IntegrationFx;
-import com.fanxing.lib.integration.curio.CurioSetup;
 import net.neoforged.bus.api.IEventBus;
 
 /**
