@@ -7,7 +7,6 @@
   ],
   "client": [
     "EntityRenderDispatcherMixin",
-    "LivingEntityRendererMixin",
     "ModelPartAccessor"
   ],
   "injectors": {

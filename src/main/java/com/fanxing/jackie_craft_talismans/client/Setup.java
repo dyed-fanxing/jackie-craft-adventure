@@ -1,9 +1,7 @@
 package com.fanxing.jackie_craft_talismans.client;
 
 import com.fanxing.jackie_craft_talismans.JackieCraftTalismans;
-import com.zigythebird.playeranim.animation.PlayerAnimationController;
-import com.zigythebird.playeranim.api.PlayerAnimationFactory;
-import com.zigythebird.playeranimcore.enums.PlayState;
+import com.fanxing.jackie_craft_talismans.net.packet.HeadEyeOffsetPacket;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -52,6 +50,7 @@ public class Setup {
     public static void registerPayloadHandler(final RegisterPayloadHandlersEvent event) {
         // 初始化注册器，设置网络版本为"1"
         final PayloadRegistrar registrar = event.registrar("1");
+        registrar.playToServer(HeadEyeOffsetPacket.TYPE, HeadEyeOffsetPacket.STREAM_CODEC, HeadEyeOffsetPacket::handle);
     }
 
     /**
@@ -68,10 +67,7 @@ public class Setup {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            // 注册动画层。1000 是优先级，你可以根据需要调整（文档建议重要动画用 1500+）
-            PlayerAnimationFactory.ANIMATION_DATA_FACTORY.registerFactory(PlayerAnimations.ATTACK, 1500,
-                    player -> new PlayerAnimationController(player,(controller, state, animSetter) -> PlayState.STOP)
-            );
+//            CuriosRendererRegistry.register(ItemTypesJCT.PIG_TALISMAN.get(), PigTalismanCurioRenderer::new);
         });
     }
 }

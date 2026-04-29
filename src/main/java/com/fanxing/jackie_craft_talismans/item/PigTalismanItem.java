@@ -1,23 +1,29 @@
 package com.fanxing.jackie_craft_talismans.item;
 
 import com.fanxing.jackie_craft_talismans.JackieCraftTalismans;
+import com.fanxing.jackie_craft_talismans.client.KeyBindings;
+import com.fanxing.jackie_craft_talismans.client.gui.screen.PigTalismanConfigScreen;
 import com.fanxing.jackie_craft_talismans.client.render.item.PigTalismanItemRender;
-import com.fanxing.lib.registry.Attributes;
-import com.fanxing.lib.registry.DataComponents;
-import com.fanxing.lib.utils.collsion.CapsuleCCDUtils;
+import com.fanxing.jackie_craft_talismans.entity.attachment.HeadEyeOffset;
+import com.fanxing.lib.item.capability.LockHorizontalView;
+import com.fanxing.lib.net.packet.StopUsingPacket;
+import com.fanxing.lib.registry.DataComponentsFxLib;
+import com.fanxing.lib.util.collsion.CapsuleCCDUtils;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,25 +36,16 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class PigTalismanItem extends AbstractTalismanItem implements GeoItem {
+public class PigTalismanItem extends AbstractTalismanItem implements LockHorizontalView, GeoItem {
     private static final Logger log = LoggerFactory.getLogger(PigTalismanItem.class);
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    public static final  ResourceLocation ATTACK_DAMAGE_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath(JackieCraftTalismans.MOD_ID, "default.attack_damage_id");
 
     public static final float RADIUS = 0.025F;
-    public static final float GAP = 0.125F;
-    public static final int SEGMENTS = 32;
     public static final int GROW_DURATION = 2;      // 光束生长刻数
-
-
-    public static final ResourceLocation DAMAGE_INTERVAL_ID = ResourceLocation.fromNamespaceAndPath(JackieCraftTalismans.MOD_ID, "damage_interval");
-    // 激光参数
     public static final float LASER_RANGE = 32f;      // 最大距离
-    public static final float DAMAGE = 2.0f;      // 每次伤害
-    public static final int DAMAGE_INTERVAL = 4;        // 每4刻（0.2秒）造成一次伤害
-    public static final int USE_EASE = 4;        // 每4刻（0.2秒）造成一次伤害
     public static final int MAX_USE_DURATION = 1000;
     // 顺序：内层、外层、中心、边缘
-    private static final List<Integer> DEFAULT = List.of(
+    public static final List<Integer> DEFAULT = List.of(
             0xFFFFFF78, // 内层: R=255, G=255, B=120, A=255  -> (255<<24)|(255<<16)|(120<<8)|255
             0xB4AA6622, // 外层: R=170, G=102, B=34,  A=180  -> (180<<24)|(170<<16)|(102<<8)|34
             0xC8FFC850, // 中心: R=255, G=200, B=80,  A=200  -> (200<<24)|(255<<16)|(200<<8)|80
@@ -61,51 +58,59 @@ public class PigTalismanItem extends AbstractTalismanItem implements GeoItem {
     }
 
     public PigTalismanItem(Properties properties) {
-        super(properties.stacksTo(1).component(DataComponents.COLOR_SCHEME, DEFAULT));
+        super(properties);
     }
 
+    @Override
+    public void inventoryTick(@NotNull ItemStack stack, Level level, @NotNull Entity entity, int slot, boolean selected) {
+        if (level.isClientSide && selected && KeyBindings.TALISMAN_CONFIG.isDown()) {
+            Minecraft mc = Minecraft.getInstance();
+            mc.options.keyUse.setDown(false);
+            mc.setScreen(new PigTalismanConfigScreen((Player) entity));
+            PacketDistributor.sendToServer(StopUsingPacket.INSTANCE);
+        }
+    }
 
-    /**
-     * 每刻调用（长按持续）
-     */
     @Override
     public void onUseTick(@NotNull Level level, @NotNull LivingEntity entity, @NotNull ItemStack stack, int remainingUseDuration) {
-        // 只服务端执行伤害逻辑
+        useTick(level, entity, stack, entity.getTicksUsingItem());
+    }
+
+    public void useTick(Level level, LivingEntity entity, ItemStack stack, int usingTicks) {
         if (!level.isClientSide()) {
-            int usingTicks = entity.getTicksUsingItem();
-            if(usingTicks > CHARGE_DURATION){
-                float progress = Math.min(1.0f, (float) (usingTicks - AbstractTalismanItem.CHARGE_DURATION) / GROW_DURATION);
-                List<Entity> entities = CapsuleCCDUtils.getHitEntitiesOnViewVector(entity, 0.2f, LASER_RANGE*progress, e -> e.isAlive() && e != entity, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE);
-                entities.forEach(target -> {
-                    target.hurt(level.damageSources().indirectMagic(entity, entity), DAMAGE);
-                    if (level instanceof ServerLevel serverLevel) {
-                        // 命中音效（可选，也可以放在渲染器里）
-                        serverLevel.playSound(null, target.blockPosition(), SoundEvents.LIGHTNING_BOLT_IMPACT, SoundSource.PLAYERS, 1.0f, 1.0f);
-                    }
-                });
+            if (usingTicks > CHARGE_DURATION) {
+                List<Vec3> eyesPosition = HeadEyeOffset.getEyesPosition(entity, 1.0f);
+                for (Vec3 eyePosition : eyesPosition) {
+                    float progress = Math.min(1.0f, (float) (usingTicks - AbstractTalismanItem.CHARGE_DURATION) / GROW_DURATION);
+                    List<Entity> entities = CapsuleCCDUtils.getHitEntities(entity, eyePosition, RADIUS, LASER_RANGE * progress * progress, e -> e.isAlive() && e != entity, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE);
+                    entities.forEach(target -> target.hurt(level.damageSources().indirectMagic(entity, entity), (float) entity.getAttributeValue(Attributes.ATTACK_DAMAGE)));
+                }
             }
         }
-        super.onUseTick(level, entity, stack, remainingUseDuration);
     }
 
 
     public static ItemAttributeModifiers createAttributes() {
-        return ItemAttributeModifiers.builder().add(Attributes.DAMAGE_INTERVAL,
-                        new AttributeModifier(DAMAGE_INTERVAL_ID, 4, AttributeModifier.Operation.ADD_VALUE),EquipmentSlotGroup.MAINHAND)
-                .build();
+        return ItemAttributeModifiers.builder().add(
+                Attributes.ATTACK_DAMAGE,
+                new AttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, 2, AttributeModifier.Operation.ADD_VALUE),
+                EquipmentSlotGroup.MAINHAND
+        ).build();
     }
 
+    public static List<Integer> getColors(ItemStack stack) {
+        return stack.get(DataComponentsFxLib.COLOR_SCHEME);
+    }
 
-    public static int[] getBeamColor(ItemStack stack) {
-        List<Integer> colors = stack.get(DataComponents.COLOR_SCHEME);
-        return new int[]{colors.get(0),colors.get(1)};
-    }
-    public static int[] getLightingColor(ItemStack stack) {
-        List<Integer> colors = stack.get(DataComponents.COLOR_SCHEME);
-        return new int[]{colors.get(2),colors.get(3)};
-    }
 
     // ---------- GeckoLib 渲染 ----------
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
+    }
+
     @Override
     public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
         consumer.accept(new GeoRenderProvider() {
@@ -121,10 +126,6 @@ public class PigTalismanItem extends AbstractTalismanItem implements GeoItem {
         });
     }
 
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
-    }
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {

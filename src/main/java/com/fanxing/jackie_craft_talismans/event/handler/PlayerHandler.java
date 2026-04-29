@@ -38,5 +38,10 @@ public class PlayerHandler {
         LogUtils.getLogger().info("玩家数据{}",event.getEntity().getPersistentData());
     }
 
+    @SubscribeEvent
+    public static void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
+//        LogUtils.getLogger().info("玩家数据{}",event.getEntity().getPersistentData());
+        LogUtils.getLogger().info("玩家手中物品数据{}",event.getEntity().getUseItem().getComponents());
+    }
 
 }

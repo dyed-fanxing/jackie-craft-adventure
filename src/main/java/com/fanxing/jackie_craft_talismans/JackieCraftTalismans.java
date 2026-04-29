@@ -1,5 +1,6 @@
 package com.fanxing.jackie_craft_talismans;
 
+import com.fanxing.jackie_craft_talismans.integration.Integration;
 import com.fanxing.jackie_craft_talismans.registry.*;
 import com.fanxing.lib.phys.motion.PhysicsMotionModel;
 import com.mojang.logging.LogUtils;
@@ -36,16 +37,18 @@ public class JackieCraftTalismans {
         modEventBus.addListener(this::commonSetup);
 
 
-        BlockTypes.register(modEventBus);           // 方块注册
-        ItemTypes.register(modEventBus);            // 物品注册
+        BlockTypesJCT.register(modEventBus);           // 方块注册
+        ItemTypesJCT.register(modEventBus);            // 物品注册
         EntityTypes.register(modEventBus);          // 实体注册
         MobEffectTypes.registry(modEventBus);       // buff注册
         SoundEvents.register(modEventBus);           // 声音注册
         ParticleTypes.register(modEventBus);        // 粒子注册
         MenuTypes.register(modEventBus);            // 菜单注册
-        AttachmentTypes.register(modEventBus);      // 附件注册
+        AttachmentTypesJCT.register(modEventBus);      // 附件注册
         MemoryModuleTypes.register(modEventBus);      // 记忆注册
-        DataComponents.register(modEventBus);
+        DataComponentsJCT.register(modEventBus);
+        Integration.register(modEventBus);
+
 
         // 注册当前类以响应游戏事件
         NeoForge.EVENT_BUS.register(this);
@@ -63,7 +66,7 @@ public class JackieCraftTalismans {
             modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
         }
         PhysicsMotionModel.init();
-
+        modContainer.registerConfig(ModConfig.Type.SERVER, HeadEyeOffsetConfig.SPEC, "jackie_craft_talismans-eyeoffset-server.toml");
     }
 
     // 通用设置方法

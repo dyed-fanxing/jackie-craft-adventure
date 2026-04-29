@@ -1,6 +1,7 @@
 package com.fanxing.jackie_craft_talismans;
 
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
@@ -8,6 +9,9 @@ import org.apache.commons.lang3.tuple.Pair;
 
 @EventBusSubscriber(modid = JackieCraftTalismans.MOD_ID)
 public class Config {
+    public static boolean isLoadCurio = ModList.get().isLoaded("curios");
+    public static final String CURIO_TALISMAN_SLOT = "talisman";
+
     public static final Common COMMON;
     public static final ModConfigSpec COMMON_SPEC;
 

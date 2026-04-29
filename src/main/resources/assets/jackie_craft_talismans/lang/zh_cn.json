@@ -1,112 +1,25 @@
 {
-  "itemGroup.jackie_craft_talismans": "传说之下",
-  "item.jackie_craft_talismans.gaster_blaster": "加斯特冲击波",
-  "item.jackie_craft_talismans.gravity_debug_stick": "重力调试棍",
+  "itemGroup.jackie_craft_talismans": "成龙历险记-符咒",
+  "item.jackie_craft_talismans.pig_talisman": "猪符咒",
 
-  "entity.jackie_craft_talismans.sans": "杉斯",
-  "entity.jackie_craft_talismans.gaster_blaster": "加斯特冲击波",
-  "entity.jackie_craft_talismans.flying_bone": "魔法骨头",
-  "entity.jackie_craft_talismans.rotation_bone": "魔法骨头",
-  "entity.jackie_craft_talismans.ground_bone": "魔法骨头",
-  "effect.jackie_craft_talismans.karma": "业力",
-  "effect.jackie_craft_talismans.gravity": "重力",
+  "gui.jackie_craft_talismans.head_pivot_logic_eye_offset": "头部旋转中心高度",
+  "gui.jackie_craft_talismans.head_pivot_logic_eye_offset_tooltip": "头部旋转中心相对于脚底位置的垂直距离",
+  "gui.jackie_craft_talismans.eye_height_offset": "眼睛高度偏移",
+  "gui.jackie_craft_talismans.eye_height_offset_tooltip": "眼睛相对于头部旋转中心的垂直距离",
+  "gui.jackie_craft_talismans.eye_surface_offset": "眼睛表面偏移",
+  "gui.jackie_craft_talismans.eye_surface_offset_tooltip": "眼睛表面相对于头部几何中心的水平距离",
+  "gui.jackie_craft_talismans.eye_gap": "双眼间距",
+  "gui.jackie_craft_talismans.beam_inner": "激光内层",
+  "gui.jackie_craft_talismans.beam_outer": "激光外层",
+  "gui.jackie_craft_talismans.lightning_core": "雷电核心",
+  "gui.jackie_craft_talismans.lightning_edge": "雷电边缘",
+  "gui.jackie_craft_talismans.preset": "预设",
+  "gui.jackie_craft_talismans.add": "添加",
+  "gui.jackie_craft_talismans.color_preset.tooltip": "请输入预设名称",
+  "key.category.jackie_craft_talismans": "成龙历险记-符咒",
+  "key.jackie_craft_talismans.talisman_config": "符咒配置界面",
 
-  "direction.jackie_craft_talismans.up":"上",
-  "direction.jackie_craft_talismans.down":"下",
-  "direction.jackie_craft_talismans.east":"东",
-  "direction.jackie_craft_talismans.west":"西",
-  "direction.jackie_craft_talismans.south":"南",
-  "direction.jackie_craft_talismans.north":"北",
-  "menu.jackie_craft_talismans.gravity_selection": "重力方向选择",
-  "gui.jackie_craft_talismans.select_direction": "请选择重力方向：",
-  "gui.jackie_craft_talismans.close": "关闭",
-  "mount.onboard.double.key.dismount": "双击 %1$s 来脱离",
-
-  "death.attack.jackie_craft_talismans.frame_blockable.player": "%1$s 被 %2$s 使用 帧伤 折磨死了",
-  "death.attack.jackie_craft_talismans.frame_blockable.rotation_bone.player": "%1$s 被 %2$s 使用 魔法骨头 砸死了",
-  "death.attack.jackie_craft_talismans.frame_blockable.flying_bone.player": "%1$s 被 %2$s 使用 魔法骨头 射穿了",
-  "death.attack.jackie_craft_talismans.frame.ground_bone.player": "%1$s 被 %2$s 使用 魔法骨头 刺穿了",
-  "death.attack.jackie_craft_talismans.frame.gaster_blaster.player": "%1$s 被 %2$s 使用 加斯特冲击波 轰成了渣渣",
-
-
-
-
-  "jackie_craft_talismans.debug.ccd.on": "CCD扫掠: 显示",
-  "jackie_craft_talismans.debug.ccd.off": "CCD扫掠: 关闭",
-
-
-
-  "dialogue.jackie_craft_talismans.entity.mercy": "%1$s正在%2$s你",
-  "dialogue.jackie_craft_talismans.mercy": "饶恕",
-
-
-
-
-
-  "jackie_craft_talismans.configuration.general": "通用",
-  "config.jackie_craft_talismans.general.segments": "圆段数",
-  "jackie_craft_talismans.configuration.general.expPerLv": "每级所需经验基数",
-  "jackie_craft_talismans.configuration.general.expCurveExponent": "经验曲线指数",
-  "jackie_craft_talismans.configuration.general.maxLv": "最大等级",
-
-  "jackie_craft_talismans.configuration.entity_exp": "实体经验",
-  "jackie_craft_talismans.configuration.entity_exp.entityExp": "实体经验列表",
-
-  "jackie_craft_talismans.configuration.special_kills": "特殊击杀奖励",
-  "jackie_craft_talismans.configuration.special_kills.namedKillExp": "命名生物额外经验",
-  "jackie_craft_talismans.configuration.special_kills.namedKillDays": "命名生物所需天数",
-  "jackie_craft_talismans.configuration.special_kills.tamedKillExp": "驯服生物额外经验",
-  "jackie_craft_talismans.configuration.special_kills.tamedKillDays": "驯服生物所需天数",
-
-  "jackie_craft_talismans.configuration.attributes": "属性点",
-  "jackie_craft_talismans.configuration.attributes.pointsPerLevel": "每级属性点",
-  "jackie_craft_talismans.configuration.attributes.strengthPerPoint": "每点力量增加伤害百分比",
-  "jackie_craft_talismans.configuration.attributes.toughnessArmorPerPoint": "每点坚韧增加护甲值",
-  "jackie_craft_talismans.configuration.attributes.toughnessToughnessPerPoint": "每点坚韧增加护甲韧性",
-  "jackie_craft_talismans.configuration.attributes.healthPerPoint": "每点生命增加生命值",
-
-  "jackie_craft_talismans.configuration.character_entities": "角色实体",
-  "jackie_craft_talismans.configuration.character_entities.torielEntityId": "Toriel 实体ID",
-  "jackie_craft_talismans.configuration.character_entities.papyrusEntityId": "Papyrus 实体ID",
-  "jackie_craft_talismans.configuration.character_entities.undyneEntityId": "Undyne 实体ID",
-  "jackie_craft_talismans.configuration.character_entities.alphysEntityId": "Alphys 实体ID",
-  "jackie_craft_talismans.configuration.character_entities.mettatonEntityId": "Mettaton 实体ID",
-  "jackie_craft_talismans.configuration.character_entities.sansEntityId": "Sans 实体ID",
-  "jackie_craft_talismans.configuration.character_entities.asgoreEntityId": "Asgore 实体ID",
-
-  "jackie_craft_talismans.configuration.chara_hidden": "隐藏能力",
-  "jackie_craft_talismans.configuration.chara_hidden.charaRequiredLevel": "Chara 所需LV等级",
-  "jackie_craft_talismans.configuration.chara_hidden.charaRequiredItem": "Chara 所需手持物品ID",
-  "jackie_craft_talismans.configuration.chara_hidden.charaMaxHpPercent": "Chara 每次攻击削减最大生命值百分比",
-  "jackie_craft_talismans.configuration.chara_hidden.charaRemoveBuffs": "Chara 攻击是否移除目标正面效果",
-
-  "jackie_craft_talismans.configuration.toriel": "弱肉强食",
-  "jackie_craft_talismans.configuration.toriel.damageThreshold": "触发阈值",
-  "jackie_craft_talismans.configuration.toriel.damageStep": "每级增伤比例",
-
-  "jackie_craft_talismans.configuration.papyrus": "众叛亲离",
-  "jackie_craft_talismans.configuration.papyrus.critDamageStep": "每级暴击伤害增加量",
-
-  "jackie_craft_talismans.configuration.undyne": "决心熔蚀",
-  "jackie_craft_talismans.configuration.undyne.attackSpeedStep": "每级攻速增加比例",
-
-  "jackie_craft_talismans.configuration.alphys": "懦弱烙印",
-  "jackie_craft_talismans.configuration.alphys.damageReductionStep": "每级减伤增加比例",
-  "jackie_craft_talismans.configuration.alphys.durationStep": "每级增加秒数",
-
-  "jackie_craft_talismans.configuration.mettaton": "万众瞩目",
-  "jackie_craft_talismans.configuration.mettaton.damagePerEnemyStep": "每级增伤增加比例",
-  "jackie_craft_talismans.configuration.mettaton.rangeStep": "每级增加范围",
-
-  "jackie_craft_talismans.configuration.sans": "罪业回响",
-  "jackie_craft_talismans.configuration.sans.frameReductionStep": "每级无敌帧减少比例增加",
-
-  "jackie_craft_talismans.configuration.asgore": "迟王断命",
-  "jackie_craft_talismans.configuration.asgore.armorPierceStep": "每级无视护甲增加比例",
-  "jackie_craft_talismans.configuration.asgore.shieldBreakStep": "每级破盾概率增加",
-
-  "jackie_craft_talismans.configuration.chara_hidden": "屠杀殆尽",
-  "jackie_craft_talismans.configuration.chara_hidden.charaMaxHpPercent": "每次攻击削减最大生命值百分比",
-  "jackie_craft_talismans.configuration.chara_hidden.charaRemoveBuffs": "攻击是否移除目标正面效果"
-
+  "jackie_craft_talismans.config.entities_eye_offset": "实体眼睛位置偏移列表",
+  "curios.identifier.talisman": "符咒",
+  "curios.modifiers.talisman": "佩戴符咒时："
 }

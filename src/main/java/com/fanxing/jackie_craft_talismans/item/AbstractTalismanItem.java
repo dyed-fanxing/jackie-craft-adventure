@@ -1,6 +1,6 @@
 package com.fanxing.jackie_craft_talismans.item;
 
-import com.fanxing.lib.registry.DataComponents;
+import com.fanxing.lib.registry.DataComponentsFxLib;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,16 +24,17 @@ public abstract class AbstractTalismanItem extends Item{
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         player.startUsingItem(hand);
-        stack.set(DataComponents.USING_ENTITY_ID,player.getId());
+        stack.set(DataComponentsFxLib.USING_ENTITY_ID,player.getId());
         return InteractionResultHolder.consume(stack);
     }
-
+    public void useTick(Level level, LivingEntity entity,ItemStack stack, int usingTicks) {
+    }
     /**
      * 停止使用（松开右键）
      */
     @Override
     public void onStopUsing(@NotNull ItemStack stack, @NotNull LivingEntity entity, int count) {
-        stack.remove(DataComponents.USING_ENTITY_ID);
+        stack.remove(DataComponentsFxLib.USING_ENTITY_ID);
     }
 
 }

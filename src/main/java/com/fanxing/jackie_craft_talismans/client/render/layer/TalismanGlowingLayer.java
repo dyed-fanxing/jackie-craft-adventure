@@ -2,7 +2,7 @@ package com.fanxing.jackie_craft_talismans.client.render.layer;
 
 import com.fanxing.jackie_craft_talismans.JackieCraftTalismans;
 import com.fanxing.jackie_craft_talismans.item.AbstractTalismanItem;
-import com.fanxing.lib.registry.DataComponents;
+import com.fanxing.lib.registry.DataComponentsFxLib;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
@@ -25,11 +25,13 @@ public class TalismanGlowingLayer<T extends AbstractTalismanItem & GeoItem> exte
         super(entityRendererIn);
         this.glowTexture = ResourceLocation.fromNamespaceAndPath(JackieCraftTalismans.MOD_ID, glowTexturePath);
     }
+
+
     @Override
     public void render(PoseStack poseStack, T animatable, BakedGeoModel bakedModel, @Nullable RenderType renderType, MultiBufferSource bufferSource, @Nullable VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         // 获取当前渲染的物品栈
         ItemStack stack = ((GeoItemRenderer<?>) getRenderer()).getCurrentItemStack();
-        Integer id = stack.get(DataComponents.USING_ENTITY_ID);
+        Integer id = stack.get(DataComponentsFxLib.USING_ENTITY_ID);
         LivingEntity entity = null;
         if (Minecraft.getInstance().level != null && id != null)
             entity = (LivingEntity) Minecraft.getInstance().level.getEntity(id);
