@@ -1,0 +1,7 @@
+{
+  "order": 1,
+  "size": 3,
+  "icon": "jackie_craft_adventure:slot/empty_talisman_slot",
+  "add_cosmetic": false,
+  "drop_rule": "DEFAULT"
+}

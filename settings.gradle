@@ -10,7 +10,7 @@ plugins {
     id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
 }
 
-rootProject.name = "jackie_craft_talismans"
+rootProject.name = "jackie_craft_adventure"
 // 如果 core-lib 子模块存在，则包含为复合构建
 //if (file('lib').exists()) {
 //    println "Including build from lib"
