@@ -224,8 +224,8 @@ public class PigTalismanConfigScreen extends Screen {
         }), Placement.BOTTOM, 1);
     }
 
-    protected ColorPaletteWidget createColorPaletteWidget(String name, List<Integer> colors) {
-        return ColorPaletteWidget.horizontal(0, 0, COLOR_SWATCH_SIZE, COLOR_SWATCH_SIZE, colors, this::onPressColorPalette, Component.translatable(name));
+    protected ColorPaletteWidget createColorPaletteWidget(Component label, List<Integer> colors) {
+        return ColorPaletteWidget.horizontal(0, 0, COLOR_SWATCH_SIZE, COLOR_SWATCH_SIZE, colors, this::onPressColorPalette, label);
     }
 
 
@@ -254,13 +254,13 @@ public class PigTalismanConfigScreen extends Screen {
     }
 
     private void doSavePreset(String name) {
-        presetGroup.addOption(createColorPaletteWidget(name, schemeGroup.getValues()));
+        presetGroup.addOption(createColorPaletteWidget(Component.literal(name), schemeGroup.getValues()));
         //刷新预设栏
         refreshPresetColorPaletteByGroup();
     }
 
     private void savePresetPalettes() {
-        PacketDistributor.sendToServer(new ColorPalettesPacket(presetGroup.getOptions().stream().map((t) -> new ColorPalette(t.getMessage().getString(), t.getValue())).toList()));
+        PacketDistributor.sendToServer(new ColorPalettesPacket(presetGroup.getOptions().stream().map((t) -> new ColorPalette(t.getMessage(), t.getValue())).toList()));
         onClose();
     }
 

@@ -22,7 +22,7 @@ repositories {
     maven { name = 'GeckoLib'; url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
     maven { name = "KosmX's maven"; url = 'https://maven.kosmx.dev/' }
     maven { name = "RedlanceMinecraft"; url = "https://repo.redlance.org/public" }
-    maven { url "https://cursemaven.com" }
+    maven { name = "Curios API"; url "https://cursemaven.com" }
     maven { name = "ModMaven"; url = "https://modmaven.dev" }
     maven { name = "Jared's maven"; url = "https://maven.blamejared.com/" }
 }

@@ -33,7 +33,9 @@ public class ItemTypesJCT {
             "pig_talisman",
             () -> new PigTalismanItem(new Item.Properties().stacksTo(1)
                     .component(DataComponentsFxLib.COLOR_SCHEME, PigTalismanItem.DEFAULT)
-                    .component(DataComponentsFxLib.COLOR_PALETTES, new ArrayList<>(List.of(new ColorPalette("options.gamma.default", PigTalismanItem.DEFAULT))))
+                    .component(DataComponentsFxLib.COLOR_PALETTES, new ArrayList<>(List.of(
+                            new ColorPalette(Component.translatable("options.gamma.default"), PigTalismanItem.DEFAULT))
+                    ))
                     .attributes(PigTalismanItem.createAttributes())
             )
     );

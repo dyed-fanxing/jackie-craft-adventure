@@ -65,7 +65,7 @@ public class JackieCraftTalismans {
         if (FMLEnvironment.dist == Dist.CLIENT) {
             modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
         }
-        PhysicsMotionModel.init();
+        PhysicsMotionModel.registry();
         modContainer.registerConfig(ModConfig.Type.SERVER, HeadEyeOffsetConfig.SPEC, "jackie_craft_talismans-eyeoffset-server.toml");
     }
 
