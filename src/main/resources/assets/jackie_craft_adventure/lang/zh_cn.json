@@ -1,5 +1,5 @@
 {
-  "itemGroup.jackie_craft_adventure": "成龙历险记-符咒",
+  "itemGroup.jackie_craft_adventure": "成龙历险记",
   "item.jackie_craft_adventure.pig_talisman": "猪符咒",
   "item.jackie_craft_adventure.pig_talisman.tooltip": "使用时可按下 %s 锁定水平视角\n%s\n按下 %s 打开配置界面",
   "item.curio.jackie_craft_adventure.pig_talisman.tooltip": "佩戴时长按 %s 使用",
@@ -17,7 +17,7 @@
   "gui.jackie_craft_adventure.preset": "预设",
   "gui.jackie_craft_adventure.add": "添加",
   "gui.jackie_craft_adventure.color_preset.tooltip": "请输入预设名称",
-  "key.category.jackie_craft_adventure": "成龙历险记-符咒",
+  "key.category.jackie_craft_adventure": "成龙历险记",
   "key.jackie_craft_adventure.talisman_config": "符咒配置界面",
   "jackie_craft_adventure.config.entities_eye_offset": "实体眼睛位置偏移列表",
   "curios.identifier.talisman": "符咒",

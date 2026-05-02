@@ -1,5 +1,5 @@
 {
-  "itemGroup.jackie_craft_adventure": "Jackie Chan Adventures - Talismans",
+  "itemGroup.jackie_craft_adventure": "Jackie Chan Adventure",
   "item.jackie_craft_adventure.pig_talisman": "Pig Talisman",
   "item.jackie_craft_adventure.pig_talisman.tooltip": "Press %s while using to lock horizontal camera angle\n%s\nPress %s to open config screen",
   "item.curio.jackie_craft_adventure.pig_talisman.tooltip": "While worn, hold %s to use",
@@ -18,7 +18,7 @@
   "gui.jackie_craft_adventure.beam_outer": "Beam Outer",
   "gui.jackie_craft_adventure.lightning_core": "Lightning Core",
   "gui.jackie_craft_adventure.lightning_edge": "Lightning Edge",
-  "key.category.jackie_craft_adventure": "Jackie Craft - Talismans",
+  "key.category.jackie_craft_adventure": "Jackie Craft Adventure",
   "key.jackie_craft_adventure.talisman_config": "Talisman Config",
 
   "jackie_craft_adventure.config.entities_eye_offset": "Entity Eye Offset List",
