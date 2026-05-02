@@ -71,7 +71,7 @@ side = "BOTH"
 [[dependencies."${mod_id}"]] #（可选）
 modId = "fx_lib"
 type = "required" #（必填）
-versionRange = "[1.0,2.0)"
+versionRange = "${fx_lib_version_range}"
 ordering = "NONE"
 side = "BOTH"
 
@@ -79,7 +79,7 @@ side = "BOTH"
 [[dependencies."${mod_id}"]] #（可选）
 modId = "geckolib"
 type = "required" #（必填）
-versionRange = "${geckolib_version_range}"   # 根据实际情况写
+versionRange = "${geckolib_version_range}"
 ordering = "NONE"
 side = "BOTH"
 
