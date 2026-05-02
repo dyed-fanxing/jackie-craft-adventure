@@ -1,7 +1,8 @@
 {
   "itemGroup.jackie_craft_adventure": "Jackie Chan Adventure",
   "item.jackie_craft_adventure.pig_talisman": "Pig Talisman",
-  "item.jackie_craft_adventure.pig_talisman.tooltip": "Press %s while using to lock horizontal camera angle\n%s\nPress %s to open config screen",
+  "item.jackie_craft_adventure.pig_talisman.tooltip.line1": "Press %s while using to lock horizontal camera angle",
+  "item.jackie_craft_adventure.pig_talisman.tooltip.line2": "Press %s to open config screen",
   "item.curio.jackie_craft_adventure.pig_talisman.tooltip": "While worn, hold %s to use",
 
   "gui.jackie_craft_adventure.head_pivot_logic_eye_offset": "Head Pivot Relative to Logic Eye Vertical Offset",

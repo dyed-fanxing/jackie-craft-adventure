@@ -110,10 +110,13 @@ public class PigTalismanItem extends AbstractTalismanItem implements LockHorizon
 
     @Override
     public void appendHoverText(ItemStack itemStack, TooltipContext tooltipContext, List<Component> tooltips, TooltipFlag flag) {
-        tooltips.add(Component.translatable("item." + MOD_ID + ".pig_talisman.tooltip",
-                Component.keybind(Minecraft.getInstance().options.keySprint.getName()).withStyle(ChatFormatting.BLUE),
-                IntegrationFx.IS_LOAD_CURIOS ? Component.translatable("item.curio." + MOD_ID + ".pig_talisman.tooltip",
-                        Component.keybind(KeyBindingsJCTItg.CURIO_USE_TALISMAN.getName()).withStyle(ChatFormatting.BLUE)) : Component.empty(),
+        tooltips.add(Component.translatable("item." + MOD_ID + ".pig_talisman.tooltip.line1",
+                Component.keybind(Minecraft.getInstance().options.keySprint.getName()).withStyle(ChatFormatting.BLUE)));
+        if (IntegrationFx.IS_LOAD_CURIOS) {
+            tooltips.add(Component.translatable("item.curio." + MOD_ID + ".pig_talisman.tooltip",
+                    Component.keybind(KeyBindingsJCTItg.CURIO_USE_TALISMAN.getName()).withStyle(ChatFormatting.BLUE)));
+        }
+        tooltips.add(Component.translatable("item." + MOD_ID + ".pig_talisman.tooltip.line2",
                 Component.keybind(KeyBindings.TALISMAN_CONFIG.getName()).withStyle(ChatFormatting.BLUE)));
     }
 
