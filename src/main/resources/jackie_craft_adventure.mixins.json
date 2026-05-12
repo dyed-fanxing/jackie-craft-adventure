@@ -4,8 +4,10 @@
   "package": "com.fanxing.jackie_craft_adventure.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "DogTalismanMixin"
   ],
   "client": [
+    "ClientPacketListenerMixin",
     "EntityRenderDispatcherMixin",
     "ModelPartAccessor"
   ],

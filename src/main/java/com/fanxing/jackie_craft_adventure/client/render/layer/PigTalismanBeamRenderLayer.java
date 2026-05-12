@@ -4,7 +4,7 @@
 //import com.fanxing.jackie_craft_adventure.item.AbstractTalismanItem;
 //import com.fanxing.jackie_craft_adventure.item.PigTalismanItem;
 //import com.fanxing.jackie_craft_adventure.mixin.ModelPartAccessor;
-//import com.fanxing.lib.client.render.component.Beam;
+//import com.fanxing.lib.client.render.data.Beam;
 //import com.fanxing.lib.client.render.component.Lightning;
 //import com.fanxing.lib.client.render.shape.CapsuleRenderer;
 //import com.fanxing.lib.client.render.shape.SphereRenderer;

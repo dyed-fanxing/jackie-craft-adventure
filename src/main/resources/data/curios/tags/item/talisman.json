@@ -1,6 +1,17 @@
 {
   "replace": false,
   "values": [
+    "jackie_craft_adventure:rat_talisman",
+    "jackie_craft_adventure:bull_talisman",
+    "jackie_craft_adventure:tiger_talisman",
+    "jackie_craft_adventure:rabbit_talisman",
+    "jackie_craft_adventure:long_talisman",
+    "jackie_craft_adventure:snake_talisman",
+    "jackie_craft_adventure:horse_talisman",
+    "jackie_craft_adventure:sheep_talisman",
+    "jackie_craft_adventure:monkey_talisman",
+    "jackie_craft_adventure:chicken_talisman",
+    "jackie_craft_adventure:dog_talisman",
     "jackie_craft_adventure:pig_talisman"
   ]
 }

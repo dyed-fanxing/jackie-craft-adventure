@@ -2,7 +2,7 @@ package com.fanxing.jackie_craft_adventure;
 
 import com.fanxing.jackie_craft_adventure.integration.IntegrationJCA;
 import com.fanxing.jackie_craft_adventure.registry.*;
-import com.fanxing.lib.phys.motion.PhysicsMotionModel;
+import com.fanxing.lib.util.phys.motion.PhysicsMotionModel;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -42,7 +42,7 @@ public class JackieCraftAdventure {
         EntityTypes.register(modEventBus);          // 实体注册
         MobEffectTypes.registry(modEventBus);       // buff注册
         SoundEvents.register(modEventBus);           // 声音注册
-        ParticleTypes.register(modEventBus);        // 粒子注册
+        ParticleTypesJCA.register(modEventBus);        // 粒子注册
         MenuTypes.register(modEventBus);            // 菜单注册
         AttachmentTypesJCA.register(modEventBus);      // 附件注册
         MemoryModuleTypes.register(modEventBus);      // 记忆注册
